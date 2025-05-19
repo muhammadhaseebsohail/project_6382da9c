@@ -1,0 +1,54 @@
+Sure, to convert these styles to a CSS module, you would do the following:
+
+```css
+/* ResponsiveDesign.module.css */
+
+.responsiveDesign {
+  width: 100%;
+}
+
+.mobile {
+  padding: 16px;
+}
+
+.tablet {
+  max-width: 768px;
+  padding: 24px;
+  margin: 0 auto;
+}
+
+.desktop {
+  max-width: 1200px;
+  padding: 32px;
+  margin: 0 auto;
+}
+```
+
+And then you would import and use this CSS module in your React component as follows:
+
+```jsx
+// Necessary Imports
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './ResponsiveDesign.module.css';
+
+// Component
+const ResponsiveDesign = ({ view, children }) => {
+  return (
+    <div className={`${styles.responsiveDesign} ${styles[view]}`}>
+      {children}
+    </div>
+  );
+};
+
+// PropTypes 
+ResponsiveDesign.propTypes = {
+  view: PropTypes.oneOf(['mobile', 'tablet', 'desktop']).isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+// Export statement
+export default ResponsiveDesign;
+```
+
+In this way, the styles are locally scoped and will not interfere with styles from other components. If the `view` prop does not match any class in the CSS module, it will simply be ignored, causing no harm.
