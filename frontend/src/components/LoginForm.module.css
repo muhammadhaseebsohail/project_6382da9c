@@ -1,0 +1,73 @@
+Based on your provided component, here's how you might create a CSS module:
+
+First, rename your `.css` file to `.module.css` to make it a CSS module:
+
+```bash
+mv LoginForm.css LoginForm.module.css
+```
+
+Then, update your component to import the CSS module:
+
+```jsx
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styles from './LoginForm.module.css';
+
+// rest of your component code
+```
+
+Then, update your component to use the CSS module:
+
+```jsx
+return (
+  <form className={styles['login-form']} onSubmit={handleSubmit}>
+    <h2>Login</h2>
+    {error && <div className={styles.error}>{error}</div>}
+    <label htmlFor="username">Username:</label>
+    <input
+      type="text"
+      id="username"
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+    />
+    <label htmlFor="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+    <button type="submit">Login</button>
+  </form>
+);
+```
+
+Finally, write your CSS in the module:
+
+```css
+/* LoginForm.module.css */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.login-form label {
+  margin-top: 1em;
+}
+
+.login-form input {
+  margin-top: 0.5em;
+}
+
+.login-form button {
+  margin-top: 1em;
+}
+
+.error {
+  color: red;
+}
+```
+
+By using CSS modules, your CSS becomes local to the component and won't conflict with other global styles. The styles object will have keys that match your class names and values that are unique class names generated at build time.
