@@ -1,0 +1,70 @@
+The component is already using CSS-in-JS with the styled-components library for styling. However, if you want to use CSS modules instead, you can create a CSS file with the same name as the component file but with a .module.css extension. For example, DeploymentPipeline.module.css. The styles would be something like this:
+
+```css
+/* DeploymentPipeline.module.css */
+
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.taskTitle {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.requirementsList {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.requirementItem {
+  margin-bottom: 5px;
+}
+```
+
+Now, you have to import this CSS module in your component file and use the styles as follows:
+
+```jsx
+// Necessary imports
+import React from 'react';
+import styles from './DeploymentPipeline.module.css';
+
+// Rest of the component code...
+
+// React functional component
+const DeploymentPipeline: React.FC<DeploymentPipelineProps> = ({ task, requirements }) => {
+  // Error handling for missing props
+  if (!task || !requirements) {
+    return <div>Error: Task and requirements are required!</div>;
+  }
+
+  // Loading state
+  if (!task || !requirements) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className={styles.taskContainer}>
+      <h2 className={styles.taskTitle}>{task}</h2>
+      <ul className={styles.requirementsList}>
+        {requirements.map((requirement) => (
+          <li className={styles.requirementItem} key={requirement.id}>
+            {requirement.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// Export the component
+export default DeploymentPipeline;
+```
+
+With this, the DeploymentPipeline component now uses CSS Modules for styling. The styles are isolated to this component and won't affect other parts of the application.
